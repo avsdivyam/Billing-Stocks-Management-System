@@ -97,17 +97,31 @@ export const DATE_FORMATS = {
 // Routes
 export const ROUTES = {
   HOME: '/',
+  // Auth routes
   LOGIN: '/login',
   REGISTER: '/register',
+  FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password',
+  // Main routes
   DASHBOARD: '/dashboard',
   PROFILE: '/profile',
   USERS: '/users',
   VENDORS: '/vendors',
+  // Admin routes
+  ADMIN: {
+    DASHBOARD: '/admin',
+    USERS: '/admin/users',
+    SETTINGS: '/admin/settings',
+    BACKUP: '/admin/backup',
+  },
+  // Inventory routes
   INVENTORY: {
     CATEGORIES: '/inventory/categories',
     PRODUCTS: '/inventory/products',
     LOW_STOCK: '/inventory/low-stock',
+    BARCODES: '/inventory/barcodes',
   },
+  // Billing routes
   BILLING: {
     CUSTOMERS: '/billing/customers',
     SALES: '/billing/sales',
@@ -117,19 +131,31 @@ export const ROUTES = {
     NEW_PURCHASE: '/billing/purchases/new',
     EDIT_PURCHASE: '/billing/purchases/edit',
   },
+  
+  // Repair routes
+  REPAIR: {
+    SERVICES: '/repair/services',
+    NEW_SERVICE: '/repair/services/new',
+    EDIT_SERVICE: '/repair/services/edit',
+    INVOICE: '/repair/services/invoice',
+  },
+  // Report routes
   REPORTS: {
     SALES: '/reports/sales',
     PURCHASES: '/reports/purchases',
     GST: '/reports/gst',
     INVENTORY: '/reports/inventory',
   },
+  // OCR routes
   OCR: {
     SCAN: '/ocr/scan',
     HISTORY: '/ocr/history',
   },
+  // Speech routes
   SPEECH: {
     RECOGNIZE: '/speech/recognize',
   },
+  // Backup routes
   BACKUP: {
     LIST: '/backup',
     RESTORE: '/backup/restore',
