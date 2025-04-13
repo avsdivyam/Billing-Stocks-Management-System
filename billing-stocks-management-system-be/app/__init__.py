@@ -19,7 +19,8 @@ def create_app():
     # Configure the app
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-change-in-production')
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-        'DATABASE_URL', 'postgresql://postgres:postgres@localhost:5432/billing_stocks'
+        #'DATABASE_URL', 'postgresql://postgres:postgres@localhost:5432/billing_stocks'
+        'DATABASE_URL', 'sqlite:///billing_stocks.db'
     )
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'jwt-dev-key-change-in-production')
