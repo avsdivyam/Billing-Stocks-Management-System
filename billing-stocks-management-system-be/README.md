@@ -181,3 +181,15 @@ The API will be available at http://localhost:5000
 ## License
 
 This project is licensed under the MIT License.
+
+
+## A Google Cloud project with the Vision API enabled.
+
+Downloaded the service account JSON key file.
+
+Set the GOOGLE_APPLICATION_CREDENTIALS environment variable:
+
+Windows (PowerShell):
+
+powershell
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\path\to\your\service-account.json"
