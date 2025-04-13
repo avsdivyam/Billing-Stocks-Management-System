@@ -8,9 +8,15 @@ import './App.css';
 // Import pages
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
-import Dashboard from './pages/auth';
+import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
+
+// Import inventory pages
+import Products from './pages/inventory/Products';
+
+// Import billing pages
+import Sales from './pages/billing/Sales';
 
 // Import layouts
 import MainLayout from './layouts/MainLayout';
@@ -85,6 +91,24 @@ function App() {
                 <ProtectedRoute>
                   <MainLayout>
                     <Profile />
+                  </MainLayout>
+                </ProtectedRoute>
+              } />
+              
+              {/* Inventory routes */}
+              <Route path={ROUTES.INVENTORY.PRODUCTS} element={
+                <ProtectedRoute>
+                  <MainLayout>
+                    <Products />
+                  </MainLayout>
+                </ProtectedRoute>
+              } />
+              
+              {/* Billing routes */}
+              <Route path={ROUTES.BILLING.SALES} element={
+                <ProtectedRoute>
+                  <MainLayout>
+                    <Sales />
                   </MainLayout>
                 </ProtectedRoute>
               } />

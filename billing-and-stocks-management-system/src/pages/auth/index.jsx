@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { ROUTES } from '../../utils/constants';
 
 // Import icons
-import { 
+import {
   FiPackage, FiShoppingBag, FiUsers, FiDollarSign, 
   FiAlertCircle, FiTrendingUp, FiTrendingDown, FiActivity 
 } from 'react-icons/fi';
