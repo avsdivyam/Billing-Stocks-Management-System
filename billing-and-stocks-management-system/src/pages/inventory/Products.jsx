@@ -292,7 +292,7 @@ const Products = () => {
     >
       {/* Page header */}
       <motion.div variants={itemVariants}>
-        <Card>
+        <Card className='text-start'>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-800">Products</h1>

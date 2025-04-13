@@ -151,7 +151,7 @@ const Dashboard = () => {
       {/* Welcome message */}
       <motion.div variants={itemVariants}>
         <Card>
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-800">Welcome, {user?.full_name || user?.username}!</h1>
               <p className="mt-1 text-gray-600">

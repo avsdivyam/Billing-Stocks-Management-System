@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { ROUTES } from '../utils/constants';
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import { 
   FiPackage, FiShoppingBag, FiUsers, FiDollarSign, 
   FiAlertCircle, FiTrendingUp, FiTrendingDown, FiActivity,
@@ -150,7 +150,7 @@ const Dashboard = () => {
     >
       {/* Welcome message */}
       <motion.div variants={itemVariants}>
-        <Card>
+        <Card className='text-start'>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-800">Welcome, {user?.full_name || user?.username}!</h1>

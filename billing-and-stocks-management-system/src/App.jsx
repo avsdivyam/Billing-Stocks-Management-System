@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
 import { ROUTES } from './utils/constants';
 import './App.css';
@@ -11,16 +11,40 @@ import Register from './pages/auth/Register';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
+import Settings from './pages/Settings';
+import Vendors from './pages/vendors/Vendors';
 
 // Import inventory pages
 import Products from './pages/inventory/Products';
+import LowStock from './pages/inventory/LowStock';
+import Categories from './pages/inventory/Categories';
+import BarcodeManager from './pages/BarcodeManager';
+
+// Import repair pages
+import RepairServices from './pages/repair/RepairServices';
+import RepairJobForm from './pages/repair/RepairJobForm';
+import RepairInvoice from './pages/repair/RepairInvoice';
 
 // Import billing pages
 import Sales from './pages/billing/Sales';
+import NewSale from './pages/billing/NewSale';
+import Purchases from './pages/billing/Purchases';
+import NewPurchase from './pages/billing/NewPurchase';
+
+// Import report pages
+import SalesReport from './pages/reports/SalesReport';
+
+// Import tools pages
+import QRScanner from './pages/tools/QRScanner';
+import SpeechRecognition from './pages/tools/SpeechRecognition';
 
 // Import layouts
 import MainLayout from './layouts/MainLayout';
 import AuthLayout from './layouts/AuthLayout';
+
+// Import custom components
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import LoadingScreen from './components/ui/LoadingScreen';
 
 // Create React Query client
 const queryClient = new QueryClient({
@@ -33,84 +57,143 @@ const queryClient = new QueryClient({
   },
 });
 
-// Protected route component
-const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, loading } = useAuth();
-
-  if (loading) {
-    return <div className="flex items-center justify-center h-screen">Loading...</div>;
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to={ROUTES.LOGIN} replace />;
-  }
-
-  return children;
-};
-
-// Admin route component
-const AdminRoute = ({ children }) => {
-  const { isAuthenticated, isAdmin, loading } = useAuth();
-
-  if (loading) {
-    return <div className="flex items-center justify-center h-screen">Loading...</div>;
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to={ROUTES.LOGIN} replace />;
-  }
-
-  if (!isAdmin) {
-    return <Navigate to={ROUTES.DASHBOARD} replace />;
-  }
-
-  return children;
-};
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <ToastProvider>
-          <Router>
+      <Router>
+        <AuthProvider>
+          <ToastProvider>
             <Routes>
               {/* Auth routes */}
               <Route path={ROUTES.LOGIN} element={<AuthLayout><Login /></AuthLayout>} />
               <Route path={ROUTES.REGISTER} element={<AuthLayout><Register /></AuthLayout>} />
               
-              {/* Protected routes */}
+              {/* Protected routes - using inline protection for now */}
               <Route path={ROUTES.DASHBOARD} element={
-                <ProtectedRoute>
-                  <MainLayout>
-                    <Dashboard />
-                  </MainLayout>
-                </ProtectedRoute>
+                <MainLayout>
+                  <Dashboard />
+                </MainLayout>
               } />
               
               <Route path={ROUTES.PROFILE} element={
-                <ProtectedRoute>
-                  <MainLayout>
-                    <Profile />
-                  </MainLayout>
-                </ProtectedRoute>
+                <MainLayout>
+                  <Profile />
+                </MainLayout>
+              } />
+              
+              <Route path={ROUTES.SETTINGS} element={
+                <MainLayout>
+                  <Settings />
+                </MainLayout>
+              } />
+              
+              <Route path={ROUTES.VENDORS} element={
+                <MainLayout>
+                  <Vendors />
+                </MainLayout>
               } />
               
               {/* Inventory routes */}
+              <Route path={ROUTES.INVENTORY.CATEGORIES} element={
+                <MainLayout>
+                  <Categories />
+                </MainLayout>
+              } />
+              
               <Route path={ROUTES.INVENTORY.PRODUCTS} element={
-                <ProtectedRoute>
-                  <MainLayout>
-                    <Products />
-                  </MainLayout>
-                </ProtectedRoute>
+                <MainLayout>
+                  <Products />
+                </MainLayout>
+              } />
+              
+              <Route path={ROUTES.INVENTORY.LOW_STOCK} element={
+                <MainLayout>
+                  <LowStock />
+                </MainLayout>
+              } />
+              
+              <Route path={ROUTES.INVENTORY.BARCODES} element={
+                <MainLayout>
+                  <BarcodeManager />
+                </MainLayout>
+              } />
+              
+              {/* Repair routes */}
+              <Route path={ROUTES.REPAIR.SERVICES} element={
+                <MainLayout>
+                  <RepairServices />
+                </MainLayout>
+              } />
+              
+              <Route path={`${ROUTES.REPAIR.SERVICES}/new`} element={
+                <MainLayout>
+                  <RepairJobForm />
+                </MainLayout>
+              } />
+              
+              <Route path={`${ROUTES.REPAIR.SERVICES}/edit/:id`} element={
+                <MainLayout>
+                  <RepairJobForm />
+                </MainLayout>
+              } />
+              
+              <Route path={`${ROUTES.REPAIR.SERVICES}/invoice/:id`} element={
+                <MainLayout>
+                  <RepairInvoice />
+                </MainLayout>
               } />
               
               {/* Billing routes */}
               <Route path={ROUTES.BILLING.SALES} element={
-                <ProtectedRoute>
-                  <MainLayout>
-                    <Sales />
-                  </MainLayout>
-                </ProtectedRoute>
+                <MainLayout>
+                  <Sales />
+                </MainLayout>
+              } />
+              
+              <Route path={ROUTES.BILLING.NEW_SALE} element={
+                <MainLayout>
+                  <NewSale />
+                </MainLayout>
+              } />
+              
+              <Route path={ROUTES.BILLING.PURCHASES} element={
+                <MainLayout>
+                  <Purchases />
+                </MainLayout>
+              } />
+              
+              <Route path={ROUTES.BILLING.NEW_PURCHASE} element={
+                <MainLayout>
+                  <NewPurchase />
+                </MainLayout>
+              } />
+              
+              {/* Report routes */}
+              <Route path={ROUTES.REPORTS.SALES} element={
+                <MainLayout>
+                  <SalesReport />
+                </MainLayout>
+              } />
+              
+              {/* Tools routes */}
+              <Route path={ROUTES.OCR.SCAN} element={
+                <MainLayout>
+                  <QRScanner />
+                </MainLayout>
+              } />
+              
+              <Route path={ROUTES.SPEECH.RECOGNIZE} element={
+                <MainLayout>
+                  <SpeechRecognition />
+                </MainLayout>
+              } />
+              
+              {/* Admin routes */}
+              <Route path="/admin/*" element={
+                <MainLayout requiredRoles={['admin']}>
+                  {/* Admin components will go here */}
+                  <h1>Admin Dashboard</h1>
+                </MainLayout>
               } />
               
               {/* Redirect root to dashboard or login */}
@@ -119,9 +202,9 @@ function App() {
               {/* 404 route */}
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </Router>
-        </ToastProvider>
-      </AuthProvider>
+          </ToastProvider>
+        </AuthProvider>
+      </Router>
     </QueryClientProvider>
   );
 }

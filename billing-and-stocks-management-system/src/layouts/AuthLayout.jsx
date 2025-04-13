@@ -1,7 +1,25 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { ROUTES } from '../utils/constants';
+import LoadingScreen from '../components/ui/LoadingScreen';
 
 const AuthLayout = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
+  const navigate = useNavigate();
+  
+  // Redirect to dashboard if already authenticated
+  useEffect(() => {
+    if (!loading && isAuthenticated) {
+      navigate(ROUTES.DASHBOARD, { replace: true });
+    }
+  }, [isAuthenticated, loading, navigate]);
+  
+  // Show loading screen while checking authentication
+  if (loading) {
+    return <LoadingScreen message="Checking authentication..." />;
+  }
+  
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">

@@ -39,37 +39,30 @@ const Input = forwardRef(({
   className = '',
   ...rest
 }, ref) => {
-  // Base input classes
-  const baseInputClasses = 'block w-full rounded-input border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm';
-  
-  // Error classes
-  const errorClasses = error ? 'border-danger-300 text-danger-900 placeholder-danger-300 focus:border-danger-500 focus:ring-danger-500' : '';
-  
-  // Disabled classes
-  const disabledClasses = disabled ? 'bg-gray-100 cursor-not-allowed' : '';
-  
-  // Icon padding classes
-  const leftIconPadding = leftIcon ? 'pl-10' : '';
-  const rightIconPadding = rightIcon ? 'pr-10' : '';
-  
-  // Combine all classes
-  const inputClasses = `${baseInputClasses} ${errorClasses} ${disabledClasses} ${leftIconPadding} ${rightIconPadding} ${className}`;
+  // Use our global CSS classes
+  const inputClasses = `
+    form-input
+    ${error ? 'error' : ''}
+    ${leftIcon ? 'pl-10' : ''}
+    ${rightIcon ? 'pr-10' : ''}
+    ${className}
+  `;
   
   return (
-    <div>
+    <div className="form-group">
       {/* Label */}
       {label && (
-        <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor={id} className="form-label">
           {label}
           {required && <span className="text-danger-500 ml-1">*</span>}
         </label>
       )}
       
       {/* Input container */}
-      <div className="relative rounded-md shadow-sm">
+      <div className="relative">
         {/* Left icon */}
         {leftIcon && (
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-neutral-400">
             {leftIcon}
           </div>
         )}
@@ -94,7 +87,7 @@ const Input = forwardRef(({
         
         {/* Right icon */}
         {rightIcon && (
-          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
+          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-neutral-400">
             {rightIcon}
           </div>
         )}
@@ -102,14 +95,14 @@ const Input = forwardRef(({
       
       {/* Error message */}
       {error && (
-        <p className="mt-2 text-sm text-danger-600" id={`${id}-error`}>
+        <p className="form-error" id={`${id}-error`}>
           {error}
         </p>
       )}
       
       {/* Helper text */}
       {!error && helperText && (
-        <p className="mt-2 text-sm text-gray-500" id={`${id}-helper`}>
+        <p className="mt-2 text-sm text-neutral-500" id={`${id}-helper`}>
           {helperText}
         </p>
       )}
