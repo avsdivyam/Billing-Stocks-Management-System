@@ -307,8 +307,8 @@ const Profile = () => {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Profile sidebar */}
         <motion.div variants={itemVariants} className="lg:col-span-1">
-          <Card className='h-full py-10 text-center'>
-            <div className="flex flex-col items-center">
+          <Card className='h-full py-5 text-center' style={{ padding: "0px"}}>
+            <div className="flex flex-col items-center" style={{ padding: "0px"}}>
               <div className="relative mb-4">
                 <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-100 border-4 border-white shadow">
                   {profilePicturePreview ? (
@@ -329,7 +329,7 @@ const Profile = () => {
                     </div>
                   )}
                   <button 
-                    className="absolute bottom-10 right-20 bg-primary-500 text-white p-2 rounded-full shadow-md hover:bg-primary-600 transition-colors"
+                    className="absolute bottom-20 right-20 bg-primary-500 text-white p-2 rounded-full shadow-md hover:bg-primary-600 transition-colors"
                     onClick={() => fileInputRef.current.click()}
                   >
                     <FiCamera size={16} />
